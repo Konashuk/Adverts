@@ -1,5 +1,3 @@
-import axios from 'axios'; // Імпорт Axios
-import { useEffect, useState } from 'react';
 import {
   Img,
   Item,
@@ -13,108 +11,97 @@ import {
   DescriptionText,
   ButtonHurt,
   FetureList,
-  SvgHurt,
-  SvgStars,
-  SvgPin,
+  Svg,
 } from './AdvertCart.styled';
 import sprite from 'icons.svg';
-
-const url = 'https://65f9f5cd3909a9a65b19b6cb.mockapi.io/adverts/advert';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCumpers, selectModal } from '../../../redux/selectors';
+import { setCumper, setModal } from '../../../redux/slice';
 
 export const AdrertCart = () => {
-  const [adverts, setAdverts] = useState([]);
-  console.log(adverts);
+  const dispatch = useDispatch();
+  const cumpers = useSelector(selectCumpers);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url); // Відправка GET-запиту на мокований API
-        setAdverts(response.data); // Зберегти отримані дані у стані
-      } catch (error) {
-        console.error('Помилка під час відправлення запиту:', error);
-      }
-    };
+  const onclick = name => {
+    dispatch(setCumper(name));
+    dispatch(setModal(true));
+  };
 
-    fetchData();
-  }, []);
   return (
     <div>
       <ul>
-        {adverts.map(item => {
+        {cumpers.map(item => {
           return (
-            <Item key={item.id}>
+            <Item key={item._id}>
               <div>
-                <Img
-                  src="https://ftp.goit.study/img/campers-test-task/1-1.webp"
-                  alt={item.name}
-                />
+                <Img src={item.gallery[0]} alt={item.name} />
               </div>
               <ContainerData>
                 <NameAndPriceList>
                   <NameAndPriceItem>{item.name}</NameAndPriceItem>
                   <NameAndPriceItem>
-                    € {item.price}
+                    € {item.price},00
                     <ButtonHurt>
-                      <SvgHurt>
+                      <Svg width={24} height={24}>
                         <use xlinkHref={sprite + '#icon-hurt-bt'} />
-                      </SvgHurt>
+                      </Svg>
                     </ButtonHurt>
                   </NameAndPriceItem>
                 </NameAndPriceList>
                 <RatingAndLocatList>
                   <RatingAndLocatItem>
-                    <SvgStars>
+                    <Svg width={16} height={16}>
                       <use xlinkHref={sprite + '#icon-stars'} />
-                    </SvgStars>
+                    </Svg>
                     {item.rating}({item.reviews.length} Reviews)
                   </RatingAndLocatItem>
                   <RatingAndLocatItem>
-                    <SvgPin>
+                    <Svg width={16} height={16}>
                       <use xlinkHref={sprite + '#icon-map-pin'} />
-                    </SvgPin>
+                    </Svg>
                     {item.location}
                   </RatingAndLocatItem>
                 </RatingAndLocatList>
                 <DescriptionText>{item.description}</DescriptionText>
                 <FetureList>
                   <FetureItem>
-                    <SvgStars>
+                    <Svg width={20} height={20}>
                       <use xlinkHref={sprite + '#icon-children'} />
-                    </SvgStars>
+                    </Svg>
                     {item.adults} adults
                   </FetureItem>
                   <FetureItem>
-                    <SvgStars>
+                    <Svg width={20} height={20}>
                       <use xlinkHref={sprite + '#icon-automat'} />
-                    </SvgStars>
+                    </Svg>
                     {item.transmission}
                   </FetureItem>
                   <FetureItem>
-                    <SvgStars>
+                    <Svg width={20} height={20}>
                       <use xlinkHref={sprite + '#icon-petrol'} />
-                    </SvgStars>
+                    </Svg>
                     {item.engine}
                   </FetureItem>
                   <FetureItem>
-                    <SvgStars>
+                    <Svg width={20} height={20}>
                       <use xlinkHref={sprite + '#icon-ckichen'} />
-                    </SvgStars>
+                    </Svg>
                     Kitchen
                   </FetureItem>
                   <FetureItem>
-                    <SvgStars>
+                    <Svg width={20} height={20}>
                       <use xlinkHref={sprite + '#icon-bad'} />
-                    </SvgStars>
+                    </Svg>
                     {item.details.beds} beds
                   </FetureItem>
                   <FetureItem>
-                    <SvgStars>
+                    <Svg width={20} height={20}>
                       <use xlinkHref={sprite + '#icon-ac'} />
-                    </SvgStars>
+                    </Svg>
                     AC
                   </FetureItem>
                 </FetureList>
-                <Button>Show more</Button>
+                <Button onClick={() => onclick(item.name)}>Show more</Button>
               </ContainerData>
             </Item>
           );

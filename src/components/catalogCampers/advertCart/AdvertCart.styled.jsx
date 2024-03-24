@@ -16,6 +16,7 @@ export const Img = styled.img`
   width: 290px;
   height: 310px;
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const ContainerData = styled.div`
@@ -42,13 +43,7 @@ export const ButtonHurt = styled.button`
   border: none;
   display: flex;
   align-items: center;
-`;
-
-export const SvgHurt = styled.svg`
-  width: 24px;
-  height: 24px;
-  fill: white;
-  stroke: #101828;
+  cursor: pointer;
 `;
 
 export const RatingAndLocatList = styled.ul`
@@ -71,17 +66,7 @@ export const RatingAndLocatItem = styled.li`
   }
 `;
 
-export const SvgStars = styled.svg`
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
-`;
-
-export const SvgPin = styled.svg`
-  width: 16px;
-  height: 16px;
-  fill: white;
-  stroke: #101828;
+export const Svg = styled.svg`
   margin-right: 4px;
 `;
 
@@ -107,7 +92,8 @@ export const FetureList = styled.ul`
 
 export const FetureItem = styled.li`
   border-radius: 100px;
-  width: 126px;
+  /* width: 126px; */
+  padding: 12px 18px;
   height: 44px;
   background-color: #f2f4f7;
   font-weight: 500;
@@ -125,13 +111,14 @@ export const Button = styled.button`
   height: 56px;
   background-color: #e44848;
   border: none;
+  cursor: pointer;
 
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: #fff;
-  transition: '200ms cubic-bezier(0.4,0,0.2,1)';
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   :focus {
     background-color: #d84343;
