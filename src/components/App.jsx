@@ -10,9 +10,6 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path="filters" element={<CatalogCampers />} />
       </Route>
-
-      {/* <Route path="/favorite" element={<Products />} /> */}
-      {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   );
 };

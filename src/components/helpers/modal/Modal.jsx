@@ -3,11 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../../../redux/slice';
 import ModalCart from '../modalCart/ModalCart';
 import { selectModal } from '../../../redux/selectors';
+import { useEffect } from 'react';
 
 const ModalCumper = () => {
   Modal.setAppElement('#root');
   const isOpenModal = useSelector(selectModal);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isOpenModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpenModal]);
 
   function closeModal() {
     dispatch(setModal(false));
@@ -23,13 +36,13 @@ const ModalCumper = () => {
       transform: 'translate(-50%, -50%)',
       width: '982px',
       height: '720px',
-      padding: '48px 32px',
+      padding: '40px',
       border: '1px solid rgba(239, 237, 232, 0.2)',
-      borderRadius: '12px',
-      backgroundColor: '#10100f',
+      borderRadius: '20px',
+      backgroundColor: '#fff',
     },
     overlay: {
-      backgroundColor: 'rgba(239, 237, 232, 0.2)', // напівпрозорий чорний колір
+      background: 'rgba(17, 18, 19, 0.4)',
     },
   };
 

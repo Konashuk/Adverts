@@ -1,22 +1,16 @@
 import styled from 'styled-components';
 
-export const Item = styled.li`
+export const ContainerImg = styled.div`
   display: flex;
-  gap: 24px;
-
-  border: 1px solid rgba(16, 24, 40, 0.2);
-  border-radius: 20px;
-  padding: 24px;
-  width: 888px;
-  height: 358px;
-  margin-bottom: 32px;
+  gap: 16px;
+  width: 290px;
+  height: 310px;
+  margin-bottom: 24px;
 `;
 
 export const Img = styled.img`
-  width: 290px;
-  height: 310px;
+  object-fit: none;
   border-radius: 10px;
-  object-fit: cover;
 `;
 
 export const ContainerData = styled.div`
@@ -26,7 +20,7 @@ export const ContainerData = styled.div`
 
 export const NameAndPriceList = styled.ul`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 8px;
 `;
 
@@ -38,18 +32,11 @@ export const NameAndPriceItem = styled.li`
   display: flex;
 `;
 
-export const ButtonHurt = styled.button`
-  background-color: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`;
-
 export const RatingAndLocatList = styled.ul`
+  margin-top: 8px;
+  margin-bottom: 16px;
   display: flex;
   gap: 16px;
-  margin-bottom: 24px;
 `;
 
 export const RatingAndLocatItem = styled.li`
@@ -75,52 +62,25 @@ export const DescriptionText = styled.p`
   font-size: 16px;
   line-height: 1.5;
   color: #475467;
-
-  width: 525px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 24px;
-`;
-
-export const FetureList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-`;
-
-export const FetureItem = styled.li`
-  border-radius: 100px;
-  /* width: 126px; */
-  padding: 12px 18px;
-  height: 44px;
-  background-color: #f2f4f7;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 44px;
 `;
 
 export const Button = styled.button`
-  border-radius: 200px;
-  width: 166px;
-  height: 56px;
-  background-color: #e44848;
-  border: none;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  margin-bottom: 24px;
+`;
 
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: -0.01em;
-  color: #fff;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover,
-  :focus {
-    background-color: #d84343;
-  }
+export const CloseBtn = styled.button`
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
 `;

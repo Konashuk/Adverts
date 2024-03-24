@@ -15,7 +15,7 @@ import {
 } from './AdvertCart.styled';
 import sprite from 'icons.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCumpers, selectModal } from '../../../redux/selectors';
+import { selectCumpers } from '../../../redux/selectors';
 import { setCumper, setModal } from '../../../redux/slice';
 
 export const AdrertCart = () => {

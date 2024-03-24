@@ -1,158 +1,79 @@
-import { useSelector } from 'react-redux';
-import { selectName } from '../../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSelectedName } from '../../../redux/selectors';
 import {
-  ButtonHurt,
   ContainerData,
   DescriptionText,
-  FetureItem,
-  FetureList,
   Img,
-  Item,
   NameAndPriceItem,
   NameAndPriceList,
   RatingAndLocatItem,
   RatingAndLocatList,
   Svg,
+  ContainerImg,
+  Button,
+  CloseBtn,
 } from './ModalCart.styled';
 import sprite from '../../../icons.svg';
+import Features from './fetureList/features/ContainerFeature';
+import { useState } from 'react';
+import { setModal } from '../../../redux/slice';
+import ContainerFeature from './fetureList/features/ContainerFeature';
 
 const ModalCart = () => {
-  const {
-    name,
-    price,
-    gallery,
-    rating,
-    reviews,
-    location,
-    description,
-    adults,
-    details,
-    transmission,
-    engine,
-  } = useSelector(selectName);
+  const dispatch = useDispatch();
+  const [cumper] = useSelector(selectSelectedName);
+  const [selectedTab, setSelectedTab] = useState('features');
+
+  const handleTabChange = tab => {
+    setSelectedTab(tab); // Функція для зміни вибраної вкладки
+  };
+
+  const { name, price, gallery, rating, reviews, location, description } =
+    cumper;
 
   return (
     <div>
-      <ul>
-        return (
-        <Item>
-          <div>
-            <Img src={gallery} alt={name} />
-          </div>
-          <ContainerData>
-            <NameAndPriceList>
-              <NameAndPriceItem>{name}</NameAndPriceItem>
-              <NameAndPriceItem>
-                € {price},00
-                <ButtonHurt>
-                  <Svg width={24} height={24}>
-                    <use xlinkHref={sprite + '#icon-hurt-bt'} />
-                  </Svg>
-                </ButtonHurt>
-              </NameAndPriceItem>
-            </NameAndPriceList>
-            <RatingAndLocatList>
-              <RatingAndLocatItem>
-                <Svg width={16} height={16}>
-                  <use xlinkHref={sprite + '#icon-stars'} />
-                </Svg>
-                {rating}({reviews} Reviews)
-              </RatingAndLocatItem>
-              <RatingAndLocatItem>
-                <Svg width={16} height={16}>
-                  <use xlinkHref={sprite + '#icon-map-pin'} />
-                </Svg>
-                {location}
-              </RatingAndLocatItem>
-            </RatingAndLocatList>
-            <DescriptionText>{description}</DescriptionText>
-            <FetureList>
-              <FetureItem>
-                <Svg width={20} height={20}>
-                  <use xlinkHref={sprite + '#icon-children'} />
-                </Svg>
-                {adults} adults
-              </FetureItem>
-              <FetureItem>
-                <Svg width={20} height={20}>
-                  <use xlinkHref={sprite + '#icon-automat'} />
-                </Svg>
-                {transmission}
-              </FetureItem>
-              <FetureItem>
-                <Svg width={20} height={20}>
-                  <use xlinkHref={sprite + '#icon-petrol'} />
-                </Svg>
-                {engine}
-              </FetureItem>
-              <FetureItem>
-                <Svg width={20} height={20}>
-                  <use xlinkHref={sprite + '#icon-ckichen'} />
-                </Svg>
-                Kitchen
-              </FetureItem>
-              <FetureItem>
-                <Svg width={20} height={20}>
-                  <use xlinkHref={sprite + '#icon-bad'} />
-                </Svg>
-                {details} beds
-              </FetureItem>
-              <FetureItem>
-                <Svg width={20} height={20}>
-                  <use xlinkHref={sprite + '#icon-ac'} />
-                </Svg>
-                AC
-              </FetureItem>
-            </FetureList>
-          </ContainerData>
-        </Item>
-        );
-      </ul>
+      <CloseBtn onClick={() => dispatch(setModal(false))}>
+        <svg width="32px" height="32px">
+          <use xlinkHref={sprite + '#icon-close'} />
+        </svg>
+      </CloseBtn>
+      <ContainerData>
+        <NameAndPriceList>
+          <NameAndPriceItem>{name}</NameAndPriceItem>
+          <RatingAndLocatList>
+            <RatingAndLocatItem>
+              <Svg width={16} height={16}>
+                <use xlinkHref={sprite + '#icon-stars'} />
+              </Svg>
+              {rating}({reviews.length} Reviews)
+            </RatingAndLocatItem>
+            <RatingAndLocatItem>
+              <Svg width={16} height={16}>
+                <use xlinkHref={sprite + '#icon-map-pin'} />
+              </Svg>
+              {location}
+            </RatingAndLocatItem>
+          </RatingAndLocatList>
+          <NameAndPriceItem>€ {price},00</NameAndPriceItem>
+        </NameAndPriceList>
+        <ContainerImg>
+          {gallery.map(item => (
+            <Img src={item} alt={name} />
+          ))}
+        </ContainerImg>
+        <DescriptionText>{description}</DescriptionText>
+
+        <Button onClick={() => handleTabChange('features')}>Features</Button>
+        <Button onClick={() => handleTabChange('reviews')}>Reviews</Button>
+
+        {selectedTab === 'features' && <ContainerFeature />}
+
+        {/* Рендер компоненту Reviews, якщо вкладка "Reviews" вибрана */}
+        {selectedTab === 'reviews' && <ContainerFeature />}
+      </ContainerData>
     </div>
   );
 };
 
 export default ModalCart;
-
-// import axios from 'axios'; // Імпорт Axios
-// import { useEffect, useState } from 'react';
-// import {
-//   Img,
-//   Item,
-//   NameAndPriceItem,
-//   RatingAndLocatItem,
-//   FetureItem,
-//   Button,
-//   NameAndPriceList,
-//   ContainerData,
-//   RatingAndLocatList,
-//   DescriptionText,
-//   ButtonHurt,
-//   FetureList,
-//   Svg,
-// } from './AdvertCart.styled';
-// import sprite from 'icons.svg';
-
-// const url = 'https://65f9f5cd3909a9a65b19b6cb.mockapi.io/adverts/advert';
-
-// export const AdrertCart = () => {
-//   const [adverts, setAdverts] = useState([]);
-//   console.log(adverts);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get(url); // Відправка GET-запиту на мокований API
-//         setAdverts(response.data); // Зберегти отримані дані у стані
-//       } catch (error) {
-//         console.error('Помилка під час відправлення запиту:', error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   return (
-
-//   );
-// };
