@@ -14,7 +14,6 @@ import {
   CloseBtn,
 } from './ModalCart.styled';
 import sprite from '../../../icons.svg';
-import Features from './fetureList/features/ContainerFeature';
 import { useState } from 'react';
 import { setModal } from '../../../redux/slice';
 import ContainerFeature from './fetureList/features/ContainerFeature';
